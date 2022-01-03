@@ -8,7 +8,7 @@ namespace RecipeApi.Data.DBContexts;
 public class RecipeApiContext : DbContext , IRecipeApiContext
 {
     public DbSet<WeatherForecast> WeatherForecasts { get; set; }
-    public DBSet<Recipe> Recipes { get; set; }
+    public DbSet<Recipe> Recipes { get; set; }
     public DbSet<Direction> Directions { get; set; }
     public DbSet<Ingredient> Ingredients { get; set; }
 
@@ -20,7 +20,7 @@ public class RecipeApiContext : DbContext , IRecipeApiContext
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options) 
-        => options.UseSqlite(_connectionString.DbPath);
+        => options.UseSqlite("Data Source=RecipeApi.db");
 
 }
 

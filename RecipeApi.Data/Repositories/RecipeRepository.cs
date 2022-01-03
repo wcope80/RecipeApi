@@ -20,16 +20,16 @@ public class RecipeRepository : IRecipeRepository
     public async Task<List<Recipe>> GetRecipesAsync()
     {
         _logger.LogInformation("GetRecipesAsync");
-        var Recipe = await _context.Recipes.ToListAsync();
-        return Recipe;
+        var recipes = await _context.Recipes.ToListAsync();
+        return recipes;
     }
     public async Task<Recipe> GetRecipeByIdAsync(int id)
     {
         try
         {
             _logger.LogInformation($"GetRecipeByIdAsync for id: { id }");
-            var Recipe = await _context.Recipes.FirstOrDefaultAsync(w => w.Id == id);
-            return Recipe;
+            var recipe = await _context.Recipes.FirstOrDefaultAsync(w => w.Id == id);
+            return recipe;
         }
         catch (Exception ex)
         {

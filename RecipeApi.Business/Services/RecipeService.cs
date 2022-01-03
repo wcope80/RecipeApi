@@ -1,3 +1,9 @@
+using Microsoft.Extensions.Logging;
+using RecipeApi.Business.Interfaces;
+using RecipeApi.Data.Interfaces;
+using RecipeApi.Shared.Entities;
+using RecipeApi.Shared.Models;
+
 namespace RecipeApi.Business.Services;
 
 public class RecipeService : IRecipeService
@@ -13,13 +19,17 @@ public class RecipeService : IRecipeService
     public async Task<IEnumerable<Recipe>> GetRecipesAsync()
     {
         _logger.LogInformation("RecipeService.GetRecipeAsync");
-        return await _recipeRepository.Get();            
+        return await _recipeRepository.GetRecipesAsync();            
       
     }
     public async Task<RecipeModel> GetRecipeByIdAsync(int id)
     {
         _logger.LogInformation("RecipeService.GetRecipeByIdAsync");
-        return await _recipeRepository.GetRecipeByIdAsync(id);
+        var recipeModel = new RecipeModel();
+        var recipe = await _recipeRepository.GetRecipeByIdAsync(id);
+        recipeModel.Id = recipe.Id;
+        recipeModel.Name = recipe.Name;
+        return recipeModel;
           
     }
 }
